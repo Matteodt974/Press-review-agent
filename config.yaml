@@ -1,0 +1,220 @@
+# =====================================================================
+#  Configuration — Agent revue de presse « briefs de sécurité »
+# =====================================================================
+
+llm:
+  # "anthropic" (Claude) ou "openai"
+  provider: anthropic
+  # Colle ta clé ici. Si vide, la variable d'environnement
+  # ANTHROPIC_API_KEY (ou OPENAI_API_KEY) est utilisée.
+  api_key: ""
+  # Modèle bon marché pour le tri (beaucoup d'appels)
+  model_classify: claude-haiku-5-5
+  # Modèle plus fort pour regrouper les doublons et rédiger les résumés
+  model_write: claude-opus-5-5
+  # Effort de raisonnement (Claude) : low / medium / high
+  effort_classify: low
+  effort_write: medium
+  # Nombre d'articles envoyés par appel de classification
+  batch_size: 15
+  # Appels de classification en parallèle
+  parallel_calls: 4
+
+window:
+  # Ne jamais remonter plus loin que N jours (aussi au 1er lancement)
+  max_days: 30
+
+prefilter:
+  # Filtre mots-clés large AVANT le LLM (réduit le coût).
+  # Mets false pour tout envoyer au LLM (plus cher, meilleur rappel).
+  use_keywords: true
+  # Plafond d'articles envoyés au LLM par lancement (protection du coût)
+  max_candidates: 400
+  # Accents et majuscules ignorés ; correspondance en début de mot.
+  keywords:
+    # --- FR ---
+    - employé
+    - ex-employé
+    - ancien employé
+    - employée
+    - fonctionnaire
+    - policier
+    - policière
+    - agent
+    - agente
+    - enquêteur
+    - élu
+    - candidat
+    - maire
+    - conseiller
+    - conseillère
+    - ministre
+    - député
+    - enseignant
+    - entraîneur
+    - éducatrice
+    - accusé
+    - accusations
+    - congédié
+    - suspendu
+    - inculpé
+    - arrêté
+    - fraude
+    - abus de confiance
+    - corruption
+    - crime organisé
+    - hells
+    - motard
+    - mafia
+    - gang de rue
+    - antécédents
+    - casier judiciaire
+    - vérification
+    - habilitation
+    - cote de sécurité
+    - filtrage
+    - données personnelles
+    - renseignements personnels
+    - dossiers
+    - consulté
+    - fuite
+    - ingérence
+    - espion
+    - aéroport
+    - douane
+    - importation
+    - intrusion
+    - intrus
+    - école
+    - cpe
+    - garderie
+    - faux médecin
+    - fausse infirmière
+    - usurpation
+    - se faisait passer
+    - libéré par erreur
+    - vérificateur général
+    - saaq
+    - revenu québec
+    - upac
+    - desjardins
+    - banque
+    # --- EN ---
+    - employee
+    - worker
+    - officer
+    - police
+    - public servant
+    - councillor
+    - candidate
+    - teacher
+    - coach
+    - charged
+    - fired
+    - accused
+    - fraud
+    - breach of trust
+    - organized crime
+    - background check
+    - security clearance
+    - screening
+    - vetting
+    - insider
+    - privacy breach
+    - personal information
+    - foreign interference
+    - espionage
+    - airport
+    - cbsa
+    - smuggling
+    - intruder
+    - daycare
+    - impostor
+    - fake doctor
+    - fake nurse
+    - released in error
+    - mistakenly released
+    - auditor general
+    - bribery
+    - criminal record
+
+sources:
+  rss: true
+  # Recherche Google News par flux RSS (gratuit, remonte plus loin que
+  # les flux des médias). Zone grise côté conditions d'utilisation :
+  # mets false pour désactiver.
+  google_news: true
+  timeout_seconds: 20
+
+# Flux RSS des médias. ATTENTION : URL non testées depuis l'environnement
+# de développement (réseau bloqué). Lance :  RevueSecurite.exe --verifier-flux
+# (ou python main.py --verifier-flux) et retire/corrige ceux en échec.
+feeds:
+  - {media: Radio-Canada, url: "https://ici.radio-canada.ca/rss/4159"}
+  - {media: La Presse, url: "https://www.lapresse.ca/actualites/rss"}
+  - {media: La Presse, url: "https://www.lapresse.ca/actualites/justice-et-faits-divers/rss"}
+  - {media: La Presse, url: "https://www.lapresse.ca/actualites/politique/rss"}
+  - {media: Le Devoir, url: "https://www.ledevoir.com/rss/manchettes.xml"}
+  - {media: Le Devoir, url: "https://www.ledevoir.com/rss/section/societe.xml"}
+  - {media: Journal de Montréal, url: "https://www.journaldemontreal.com/rss.xml"}
+  - {media: Journal de Montréal, url: "https://www.journaldemontreal.com/actualite/rss.xml"}
+  - {media: Journal de Québec, url: "https://www.journaldequebec.com/actualite/rss.xml"}
+  - {media: TVA Nouvelles, url: "https://www.tvanouvelles.ca/rss.xml"}
+  - {media: Noovo Info, url: "https://www.noovo.info/rss.xml"}
+  - {media: CBC, url: "https://www.cbc.ca/webfeed/rss/rss-canada"}
+  - {media: CBC, url: "https://www.cbc.ca/webfeed/rss/rss-canada-montreal"}
+  - {media: CBC, url: "https://www.cbc.ca/webfeed/rss/rss-politics"}
+  - {media: Globe and Mail, url: "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/canada/"}
+  - {media: Globe and Mail, url: "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/politics/"}
+  - {media: CTV News, url: "https://www.ctvnews.ca/rss/ctvnews-ca-canada-public-rss-1.822284"}
+  - {media: CTV News, url: "https://www.ctvnews.ca/rss/ctvnews-ca-montreal-public-rss-1.822366"}
+  - {media: Global News, url: "https://globalnews.ca/canada/feed/"}
+  - {media: Global News, url: "https://globalnews.ca/montreal/feed/"}
+  - {media: Global News, url: "https://globalnews.ca/crime/feed/"}
+
+google_news:
+  # Seuls les résultats de ces domaines sont gardés (médias fiables).
+  domains:
+    ici.radio-canada.ca: Radio-Canada
+    radio-canada.ca: Radio-Canada
+    lapresse.ca: La Presse
+    ledevoir.com: Le Devoir
+    journaldemontreal.com: Journal de Montréal
+    journaldequebec.com: Journal de Québec
+    tvanouvelles.ca: TVA Nouvelles
+    noovo.info: Noovo Info
+    cbc.ca: CBC
+    theglobeandmail.com: Globe and Mail
+    ctvnews.ca: CTV News
+    globalnews.ca: Global News
+    thecanadianpressnews.ca: La Presse Canadienne
+  # Noms de source acceptés même si le domaine diffère
+  source_names:
+    - La Presse Canadienne
+    - The Canadian Press
+  queries_fr:
+    - 'employé accusé (consulté OR "données personnelles" OR dossiers)'
+    - 'policier accusé ("crime organisé" OR motards OR "abus de confiance")'
+    - '(candidat OR élu OR conseiller) ("casier judiciaire" OR "Hells Angels" OR antécédents)'
+    - '"vérification des antécédents" OR "habilitation de sécurité" OR "cote de sécurité"'
+    - 'employé congédié (fraude OR "accès non autorisé") banque'
+    - 'intrusion (école OR CPE OR garderie)'
+    - '"faux médecin" OR "fausse infirmière" OR "se faisait passer pour"'
+    - 'détenu "libéré par erreur"'
+    - 'fonctionnaire ("ingérence étrangère" OR espionnage)'
+    - 'employé aéroport (drogue OR importation OR cocaïne) accusé'
+  queries_en:
+    - 'employee charged accessed ("personal information" OR records) Canada'
+    - 'police officer charged "organized crime" Canada'
+    - '"background check" OR "security clearance" OR vetting failure Canada'
+    - 'airport worker charged smuggling Canada'
+    - 'inmate "released in error" Canada'
+    - '"foreign interference" OR espionage public servant charged Canada'
+    - 'fake nurse OR doctor impostor charged Canada'
+
+report:
+  # Annexe listant les articles écartés par l'IA (utile pour valider
+  # le filtre pendant la phase préliminaire)
+  annexe_exclus: true
+  annexe_exclus_max: 60
+  timezone: America/Toronto

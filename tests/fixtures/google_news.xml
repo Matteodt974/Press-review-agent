@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>Google News (fixture fictive)</title><link>https://news.google.com</link><description>test</description>
+<item><title>Un employé d'un fournisseur de télécommunications aurait consulté les dossiers de centaines de policiers - La Presse</title>
+<link>https://news.google.com/rss/articles/CBMiAAA1</link>
+<description>&lt;a href="x"&gt;Un employé d'un fournisseur de télécommunications aurait consulté les dossiers de centaines de policiers&lt;/a&gt;</description>
+<pubDate>Sun, 15 Nov 2026 15:00:00 GMT</pubDate>
+<source url="https://www.lapresse.ca">La Presse</source></item>
+<item><title>Une fausse infirmière a travaillé deux ans dans un établissement de santé de la Montérégie - Radio-Canada</title>
+<link>https://news.google.com/rss/articles/CBMiAAA2</link>
+<description>Fausse infirmière</description>
+<pubDate>Mon, 09 Nov 2026 15:00:00 GMT</pubDate>
+<source url="https://ici.radio-canada.ca">Radio-Canada.ca</source></item>
+<item><title>Employee charged in privacy breach - Random Blog</title>
+<link>https://news.google.com/rss/articles/CBMiAAA3</link>
+<description>blog</description>
+<pubDate>Mon, 09 Nov 2026 15:00:00 GMT</pubDate>
+<source url="https://random-blog.example">Random Blog</source></item>
+<item><title>Airport worker charged in cocaine smuggling ring - The Canadian Press</title>
+<link>https://news.google.com/rss/articles/CBMiAAA4</link>
+<description>CP</description>
+<pubDate>Tue, 10 Nov 2026 15:00:00 GMT</pubDate>
+<source url="https://www.thecanadianpress.com">The Canadian Press</source></item>
+</channel></rss>

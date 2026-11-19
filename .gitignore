@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Build (PyInstaller)
+dist/
+build/
+*.spec
+
+# Runtime files produced by the agent
+state.json
+*.tmp
+*.log
+revue_securite_*.docx
+evaluation/resultats/
+
+# Never commit secrets
+.env
+config.local.yaml
